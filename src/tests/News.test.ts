@@ -12,10 +12,7 @@ describe("News-Loading Tests", () => {
         expect(wrapper).toMatchSnapshot();
     });
     it("Should Load Articles", async () => {
-        const spy = vi.spyOn(axios, "get");
-        spy.mockResolvedValueOnce({
-            data: testData,
-        });
+        const spy = spyCreate();
 
         const wrapper = mount(News);
         expect(axios.get).toHaveBeenCalledTimes(1);
@@ -25,10 +22,7 @@ describe("News-Loading Tests", () => {
         expect(wrapper.text()).toContain("News-1");
     });
     it("Should load Article-1", async () => {
-        const spy = vi.spyOn(axios, "get");
-        spy.mockResolvedValueOnce({
-            data: testData,
-        });
+        const spy = spyCreate();
 
         const wrapper = mount(News);
         expect(axios.get).toHaveBeenCalledTimes(1);
@@ -41,10 +35,7 @@ describe("News-Loading Tests", () => {
         expect(wrapper.text()).toContain("News-1");
     })
     it("Should load Article 1 & 2", async () => {
-        const spy = vi.spyOn(axios, "get");
-        spy.mockResolvedValueOnce({
-            data: testData,
-        });
+        const spy = spyCreate();
 
         const wrapper = mount(News);
         expect(axios.get).toHaveBeenCalledTimes(1);
@@ -62,10 +53,8 @@ describe("News-Loading Tests", () => {
         expect(wrapper.text()).not.toContain("News-6");
     })
     it("Should load Article 1-6", async () => {
-        const spy = vi.spyOn(axios, "get");
-        spy.mockResolvedValueOnce({
-            data: testData,
-        });
+
+        const spy = spyCreate();
 
         const wrapper = mount(News);
         expect(axios.get).toHaveBeenCalledTimes(1);
@@ -84,4 +73,21 @@ describe("News-Loading Tests", () => {
         expect(wrapper.text()).toContain("News-5");
         expect(wrapper.text()).toContain("News-6");
     })
+    function spyCreate(){
+        const spy = vi.spyOn(axios, "get");
+        spy.mockResolvedValueOnce({
+            data: testData,
+        });
+        return spy;
+    }
+    type News = {
+        id: number;
+        title: string;
+        url: string;
+        imageUrl: string;
+        summary: string;
+        newsSite: string;
+        featured: boolean;
+        publishedAt: string;
+    };
 });
