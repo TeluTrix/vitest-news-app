@@ -80,14 +80,4 @@ describe("News-Loading Tests", () => {
         });
         return spy;
     }
-    type News = {
-        id: number;
-        title: string;
-        url: string;
-        imageUrl: string;
-        summary: string;
-        newsSite: string;
-        featured: boolean;
-        publishedAt: string;
-    };
 });
